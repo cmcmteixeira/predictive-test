@@ -2,6 +2,7 @@ const express = require('express'),
     yargs = require('yargs'),
     log = require('winston'),
     mappings = require('./data/mappings'),
+    fs = require('fs'),
     _ = require('lodash');
 
 const args = yargs
@@ -26,14 +27,20 @@ const args = yargs
     .argv;
 
 
+const wordTree = JSON.parse(fs.readFileSync('/data/words.json').toString());
 
-function getAllCombinatiosn(acc, list){
+function getAllCombinations(acc, list){
     if(list.length == 0) return acc;
+    const path = _.join(acc.match(/\w/g),'.');
+    if(acc.length > 0 && _.get(wordTree,path,false) === false) return false;
     return _.chain(list)
         .head()
-        .map((elem) => getAllCombinatiosn(`${acc}${elem}`,_.tail(list)))
+        .map((elem) => getAllCombinations(`${acc}${elem}`,_.tail(list)))
         .flatten()
+        .tap((e) => console.log(e))
+        .filter((elem) => elem !== false)
         .value()
+
 }
 
 
@@ -46,8 +53,9 @@ app.get('/word',(req,res) => {
             return _.get(mappings,num,[]);
         })
         .value();
-    res.json(getAllCombinatiosn('',translation))
+    res.json(getAllCombinations('',translation))
 });
+
 
 app.listen(80,'0.0.0.0', function () {
     console.log(`Listening on port ${args.port}, host ${args.host}`);
