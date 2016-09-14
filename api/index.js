@@ -1,6 +1,8 @@
 const express = require('express'),
     yargs = require('yargs'),
-    log = require('winston');
+    log = require('winston'),
+    mappings = require('./data/mappings'),
+    _ = require('lodash');
 
 const args = yargs
     .strict()
@@ -25,12 +27,26 @@ const args = yargs
 
 
 
+function getAllCombinatiosn(acc, list){
+    if(list.length == 0) return acc;
+    return _.chain(list)
+        .head()
+        .map((elem) => getAllCombinatiosn(`${acc}${elem}`,_.tail(list)))
+        .flatten()
+        .value()
+}
+
+
 var app = express();
 app.get('/word',(req,res) => {
     let query = req.query.q;
     log.info(`'matched /word' with query ${query}`);
-
-    res.json(query)
+    const translation =_.chain(query)
+        .map((num) => {
+            return _.get(mappings,num,[]);
+        })
+        .value();
+    res.json(getAllCombinatiosn('',translation))
 });
 
 app.listen(80,'0.0.0.0', function () {
