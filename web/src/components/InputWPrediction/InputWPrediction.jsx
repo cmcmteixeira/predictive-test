@@ -8,7 +8,7 @@ class InputWPrediction extends React.Component {
     render(){
         return (
             <div>
-                <input type="text" value={this.props.sequence}/>
+                <input type="text" value={this.props.sequence || ''}/>
                 <Prediction predictions={this.props.predictions}/>
             </div>
         )

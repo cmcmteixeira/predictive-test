@@ -1,12 +1,17 @@
-
-
-
+import axios from 'axios'
+import config from '../config/config.js'
 export const NUMBER_PRESSED ='NUMBER_PRESSED';
 
 export function keyPressed(currentSeq = '',newKey){
-    return {
-        type: NUMBER_PRESSED,
-        sequence: currentSeq+newKey,
-        predictions: ['pred1','pred2','pred3']
-    }
+    const newSeq = currentSeq + newKey;
+    return axios.get(
+        `${config.api.word}`,
+        {params:{q:newSeq}}
+    ).then((response) => {
+        return {
+            type: NUMBER_PRESSED,
+            sequence: newSeq,
+            predictions: response.data
+        }
+    });
 }

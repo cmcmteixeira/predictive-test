@@ -15,11 +15,12 @@ class Keyboard extends React.Component{
 
 
     onKeyClick(keyIndex){
-        this.props.dispatch(keyPressed(this.props.sequence,keyIndex));
+        keyPressed(this.props.sequence,keyIndex).then((action) => {
+            this.props.dispatch(action);
+        })
     }
 
     render() {
-        console.log(this.props)
         const keys = _.map(_.zip(config.mappings,_.range(1,config.mappings.length+1)), (keyIndex) => {
             const letters = keyIndex[0], index=keyIndex[1];
             return <Key letters={letters} key={index} number={index} onClick={this.onKeyClick.bind(this,index)}/>
