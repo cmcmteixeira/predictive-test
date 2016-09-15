@@ -10,5 +10,11 @@
     right: -205px;
     width: 200px;
     top: 99px;
+    .pred-sequence-text{
+      width: 170px;
+      text-overflow: ellipsis;
+      display: inline-block;
+      overflow: hidden;
+    }
   }
 }

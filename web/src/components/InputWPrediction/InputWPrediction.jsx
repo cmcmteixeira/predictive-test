@@ -12,7 +12,7 @@ class InputWPrediction extends React.Component {
 
                 <Well>{this.props.sentence || '...'}</Well>
                 <div className="pred-sequence">
-                    <Well>{this.props.sequence || '...'}</Well>
+                    <Well><span className="pred-sequence-text">{this.props.sequence || '...'}</span></Well>
                 </div>
                 <div className="pred-prediction">
                     <Prediction predictions={this.props.predictions}/>
