@@ -10,10 +10,10 @@ The **api** module runs on port **80**, you can change that but you may not be b
 
 
 #### With docker & docker-compose
-Run `docker-compose build`
-Run `docker-compose run web npm install`
-Run `docker-compose run api npm install`
-Run `docker-compose up`
+1. Run `docker-compose build`
+2. Run `docker-compose run web npm install`
+3. Run `docker-compose run api npm install`
+4. Run `docker-compose up`
 
 Go to the browser and open `localhost:3000`!
 #### Without docker
