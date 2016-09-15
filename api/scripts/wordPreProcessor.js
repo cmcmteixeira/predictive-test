@@ -13,5 +13,11 @@ _.forEach(words,(word) => {
         }
     });
 });
+_.forEach(words,(word) => {
+   let path = word.match(/./g);
+       if(path){
+           _.set(wordTree,`${path.join('.')}.word`,true)
+       }
+});
 
 fs.writeFileSync('/data/words.json',JSON.stringify(wordTree));

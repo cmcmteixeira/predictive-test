@@ -4,7 +4,7 @@ const express = require('express'),
     mappings = require('./data/mappings'),
     fs = require('fs'),
     cors = require('cors')
-    _ = require('lodash');
+_ = require('lodash');
 
 const args = yargs
     .strict()
@@ -30,32 +30,35 @@ const args = yargs
 
 const wordTree = JSON.parse(fs.readFileSync('/data/words.json').toString());
 
-function getAllCombinations(acc, list){
+function getPossibilitiesNodes(acc, list){
     if(list.length == 0) return acc;
-    const path = _.join(acc.match(/\w/g),'.');
+    const path = _.join(acc.match(/./g),'.');
     if(acc.length > 0 && _.get(wordTree,path,false) === false) return false;
     return _.chain(list)
         .head()
-        .map((elem) => getAllCombinations(`${acc}${elem}`,_.tail(list)))
+        .map((elem) => getPossibilitiesNodes(`${acc}${elem}`,_.tail(list)))
         .flatten()
         .tap((e) => console.log(e))
         .filter((elem) => elem !== false)
         .value()
-
 }
 
 
 var app = express();
-app.use(cors())
+app.use(cors());
+
 app.get('/word',(req,res) => {
     let query = req.query.q;
     log.info(`'matched /word' with query ${query}`);
-    const translation =_.chain(query)
-        .map((num) => {
-            return _.get(mappings,num,[]);
-        })
-        .value();
-    res.json(getAllCombinations('',translation))
+    const translation =_.map(query,(num) => {
+        return _.get(mappings,num,[]);
+    });
+    const nodesPath = getPossibilitiesNodes('',translation);
+    const possibleWords = _.filter(nodesPath,(nodePath) => {
+        const path = _.join(nodePath.match(/./g),'.');
+        return _.get(wordTree,`${path}.word`,false);
+    });
+    res.json(possibleWords)
 });
 
 
