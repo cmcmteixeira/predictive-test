@@ -1,5 +1,5 @@
 import React from 'react'
-import Prediction from './Prediction/Prediction.jsx'
+import Predictions from './Predictions/Predictions.jsx'
 import {connect} from 'react-redux';
 import {Well} from 'react-bootstrap'
 
@@ -9,18 +9,23 @@ class InputWPrediction extends React.Component {
     render(){
         return (
             <div className="pred-input">
-
                 <Well>{this.props.sentence || '...'}</Well>
                 <div className="pred-sequence">
                     <Well><span className="pred-sequence-text">{this.props.sequence || '...'}</span></Well>
                 </div>
                 <div className="pred-prediction">
-                    <Prediction predictions={this.props.predictions}/>
+                    <Predictions predictions={this.props.predictions}/>
                 </div>
             </div>
         )
     }
 }
+InputWPrediction.PropTypes ={
+    sentence: React.PropTypes.string,
+    sequence: React.PropTypes.string,
+    predictions: React.PropTypes.array
+};
+
 InputWPrediction = connect((state = {}) => state)(InputWPrediction);
 
 

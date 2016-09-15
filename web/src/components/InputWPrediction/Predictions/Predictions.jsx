@@ -4,7 +4,7 @@ import {ListGroup,ListGroupItem} from 'react-bootstrap'
 import {connect} from 'react-redux';
 
 import {selectWord}from '../../../actions/action.jsx'
-class Prediction extends React.Component {
+class Predictions extends React.Component {
     onClick(word){
         this.props.dispatch(selectWord(word))
     }
@@ -22,7 +22,12 @@ class Prediction extends React.Component {
     }
 }
 
-Prediction = connect((state = {}) => state)(Prediction);
+Predictions.PropTypes = {
+    dispatch: React.PropTypes.func,
+    predictions: React.PropTypes.array
+};
+
+Predictions = connect((state = {}) => state)(Predictions);
 
 
-export default Prediction
+export default Predictions

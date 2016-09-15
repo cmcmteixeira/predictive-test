@@ -14,7 +14,7 @@ class Key extends React.Component{
 
 Key.PropTypes = {
     number: React.PropTypes.number.isRequired,
-    letters: React.PropTypes.array.required,
+    letters: React.PropTypes.array.isRequired,
     onClick: React.PropTypes.func
 };
 

@@ -52,7 +52,8 @@ class Keyboard extends React.Component{
     }
 }
 Keyboard.propTypes ={
-    sequence : React.PropTypes.string
+    sequence : React.PropTypes.string,
+    dispatch: React.PropTypes.func.isRequired
 };
 
 

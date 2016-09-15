@@ -10,7 +10,6 @@ function getQueryWord(sequence){
    return _.last(sequence.split('1'))
 }
 
-
 export function keyPressed(currentSeq = '',newKey){
     const newSeq = currentSeq + newKey;
     return axios.get(
