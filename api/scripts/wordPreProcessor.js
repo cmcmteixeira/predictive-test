@@ -1,5 +1,6 @@
+const basePath = '/data/words';
 const fs = require('fs'),
-    words = fs.readFileSync('/data/words.txt').toString().split("\n"),
+    words = fs.readFileSync(`${basePath}.txt`).toString().split("\n"),
     _ = require('lodash');
 
 let wordTree = {};
@@ -20,4 +21,4 @@ _.forEach(words,(word) => {
        }
 });
 
-fs.writeFileSync('/data/words.json',JSON.stringify(wordTree));
+fs.writeFileSync(`${basePath}.json`,JSON.stringify(wordTree));

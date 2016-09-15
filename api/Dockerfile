@@ -10,4 +10,4 @@ COPY ./scripts/wordPreProcessor.js /data/wordPreProcessor.js
 RUN cd /data && npm init -y && npm install --save lodash
 RUN node /data/wordPreProcessor.js
 
-CMD forever -w index.js --port 80 --host '0.0.0.0'
+CMD forever -w index.js --port=80 --host='0.0.0.0'
