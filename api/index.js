@@ -3,6 +3,7 @@ const express = require('express'),
     log = require('winston'),
     mappings = require('./data/mappings'),
     fs = require('fs'),
+    cors = require('cors')
     _ = require('lodash');
 
 const args = yargs
@@ -45,6 +46,7 @@ function getAllCombinations(acc, list){
 
 
 var app = express();
+app.use(cors())
 app.get('/word',(req,res) => {
     let query = req.query.q;
     log.info(`'matched /word' with query ${query}`);
