@@ -8,13 +8,13 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import reducer from './reducers/reducer.jsx'
 
-
+import 'index.scss'
 
 const store = createStore(reducer);
 
 ReactDom.render(
     <Provider store={store}>
-        <div>
+        <div className="pred-device">
             <InputWPrediction/>
             <Keyboard/>
         </div>

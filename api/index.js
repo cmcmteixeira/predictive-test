@@ -38,7 +38,6 @@ function getPossibilitiesNodes(acc, list){
         .head()
         .map((elem) => getPossibilitiesNodes(`${acc}${elem}`,_.tail(list)))
         .flatten()
-        .tap((e) => console.log(e))
         .filter((elem) => elem !== false)
         .value()
 }

@@ -1,6 +1,14 @@
 .pred-keyboard{
   width: 100%;
-}
-.pred-input{
+  margin: auto;
+  .container{
+    max-width: 100%;
+  }
+  .col-xs-4{
+    padding: 0;
+  }
+  .pred-delete{
     width: 100%;
+    border-radius: 0;
+  }
 }

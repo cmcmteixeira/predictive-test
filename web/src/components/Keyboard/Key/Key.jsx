@@ -1,12 +1,13 @@
 import React from 'react'
+import {Button} from 'react-bootstrap'
 import './Key.scss'
 class Key extends React.Component{
     render() {
         return (
-            <div className="pred-key" onClick={this.props.onClick}>
-                <div>{this.props.number}</div>
-                <div>{this.props.letters.join(',')}</div>
-            </div>
+            <Button className="pred-key" bsStyle="primary" onClick={this.props.onClick} bsSize="large" block>
+                <span>{this.props.number}</span><br/>
+                <span>{this.props.letters.join(',')}</span>
+            </Button>
         )
     }
 }
