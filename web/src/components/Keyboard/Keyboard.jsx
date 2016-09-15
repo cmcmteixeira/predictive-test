@@ -1,25 +1,25 @@
 import React from 'react'
+import {connect} from 'react-redux';
+import _ from 'lodash';
+
+
 import Key from './Key/Key.jsx'
 import config from '../../config/config.js'
-import './Keyboard.scss'
+import {keyPressed} from '../../actions/action.jsx'
 
-import _ from 'lodash';
+
+import './Keyboard.scss'
 
 
 class Keyboard extends React.Component{
 
-    constructor(){
-        super();
-        this.state = {text: ''}
-    }
 
     onKeyClick(keyIndex){
-        this.setState((iState) => {
-            return {text: iState.text + keyIndex}
-        })
+        this.props.dispatch(keyPressed(this.props.sequence,keyIndex));
     }
 
     render() {
+        console.log(this.props)
         const keys = _.map(_.zip(config.mappings,_.range(1,config.mappings.length+1)), (keyIndex) => {
             const letters = keyIndex[0], index=keyIndex[1];
             return <Key letters={letters} key={index} number={index} onClick={this.onKeyClick.bind(this,index)}/>
@@ -34,5 +34,11 @@ class Keyboard extends React.Component{
         )
     }
 }
+Keyboard.propTypes ={
+    sequence : React.PropTypes.string
+};
+
+
+Keyboard = connect((state = {}) => state)(Keyboard);
 
 export default Keyboard

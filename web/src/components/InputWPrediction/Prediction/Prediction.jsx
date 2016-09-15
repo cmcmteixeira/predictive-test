@@ -3,9 +3,7 @@ import _ from 'lodash'
 
 class Prediction extends React.Component {
     render(){
-        const predictions = _.map([
-            "word1","word2","word3"
-        ],(elem) => {
+        const predictions = _.map(this.props.predictions,(elem) => {
             return <li key={elem}>{elem}</li>
         });
 
