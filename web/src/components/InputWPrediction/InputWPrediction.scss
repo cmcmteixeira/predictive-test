@@ -1,4 +1,14 @@
-.pred-prediction{
-  position: absolute;
-  left: 100%;
+.pred-input{
+  .pred-prediction{
+    position: absolute;
+    left: -205px;
+    width: 200px;
+    top: 99px;
+  }
+  .pred-sequence{
+    position: absolute;
+    right: -205px;
+    width: 200px;
+    top: 99px;
+  }
 }
