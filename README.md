@@ -29,7 +29,7 @@ Go to the browser and open `localhost:3000`!
   * Run `node index.js --data path_to_dictionary_json`
 3. Run the web project
   * Run `npm install`
-  * Run `npm install -g webpack-dev-server`
+  * Run `npm install -g webpack webpack-dev-server`
   * Run `webpack-dev-server --config webpack.config.js --hot --inline --progress --colors --host 0.0.0.0 --port 3000`
 4. Access localhost:3000
 
